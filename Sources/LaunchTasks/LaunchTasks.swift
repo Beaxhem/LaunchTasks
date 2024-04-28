@@ -21,9 +21,9 @@ extension LaunchTask {
 
 }
 
-public class AsyncLaunchTask: LaunchTask {
+public class AsyncLaunchTask: @unchecked Sendable, LaunchTask {
 
-    public typealias DismissAction = () -> Void
+    public typealias DismissAction = @Sendable () -> Void
 
     public var next: LaunchTask?
 
@@ -34,7 +34,9 @@ public class AsyncLaunchTask: LaunchTask {
     }
 
     public func handle() {
-        task(finish)
+        task { [weak self] in
+            self?.finish()
+        }
     }
 
 }
