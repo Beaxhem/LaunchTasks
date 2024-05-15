@@ -34,8 +34,8 @@ public class AsyncLaunchTask: @unchecked Sendable, LaunchTask {
     }
 
     public func handle() {
-        task { [weak self] in
-            self?.finish()
+        task { [self] in
+            self.finish()
         }
     }
 
