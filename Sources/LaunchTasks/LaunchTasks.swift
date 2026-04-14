@@ -69,8 +69,10 @@ public class UserDefaultsObservingLaunchTask<T>: AsyncLaunchTask {
         }
         super.handle()
 
+        #if !USER_DEFAULTS_TASKS_DEBUG
         let newSetting = update()
         userDefaults.setValue(newSetting, forKey: key)
+        #endif
     }
 
 }
